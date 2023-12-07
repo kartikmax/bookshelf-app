@@ -6,6 +6,8 @@ import { Button } from "@mui/material";
 function QrScanner({ url }) {
   const qrCodeRef = useRef(null);
 
+  const urlForNetlify = "https://tubular-valkyrie-f5b42e.netlify.app/";
+
   // Use state to handle visibility
   const [qrIsVisible, setQrIsVisible] = useState(false);
 
@@ -37,7 +39,7 @@ function QrScanner({ url }) {
           <div className="qrcode__download">
             <div className="qrcode__image">
               {/* Display QR code */}
-              <QRCode value={url} size={300} />
+              <QRCode value={urlForNetlify + url} size={300} />
             </div>
             <Button variant="contained" onClick={downloadQRCode}>
               Download QR Code
