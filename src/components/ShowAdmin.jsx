@@ -10,29 +10,90 @@ import {
   Button,
   TextField,
   InputAdornment,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 
 const ShowAdmin = () => {
-  const [bookData, setBookData] = useState([]);
+  const [bookData, setBookData] = useState([
+    {
+      bookName: "The Great Gatsby",
+      bookISBN: "9780142437834",
+      bookCategory: "Fiction",
+      rowNumber: 101,
+      cost: 20.99,
+      availability: "In Stock",
+    },
+    {
+      bookName: "To Kill a Mockingbird",
+      bookISBN: "9780061120084",
+      bookCategory: "Classics",
+      rowNumber: 102,
+      cost: 15.99,
+      availability: "Out of Stock",
+    },
+    {
+      bookName: "1984",
+      bookISBN: "9780451524935",
+      bookCategory: "Science Fiction",
+      rowNumber: 103,
+      cost: 18.99,
+      availability: "In Stock",
+    },
+    {
+      bookName: "The Catcher in the Rye",
+      bookISBN: "9780241950425",
+      bookCategory: "Classics",
+      rowNumber: 104,
+      cost: 22.99,
+      availability: "In Stock",
+    },
+    {
+      bookName: "Pride and Prejudice",
+      bookISBN: "9780141439518",
+      bookCategory: "Classics",
+      rowNumber: 105,
+      cost: 19.99,
+      availability: "In Stock",
+    },
+  ]);
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    // Fetch bookFormData from localStorage
+    // Retrieve bookFormData from localStorage
     const storedData = JSON.parse(localStorage.getItem("bookFormData")) || [];
     setBookData(storedData);
   }, []);
+  
 
   const handleEdit = (index) => {
-    // Handle edit logic based on your requirements
-    console.log("Edit button clicked for index:", index);
+    setEditIndex(index);
+    setOpenDialog(true);
   };
 
+  const handleSave = () => {
+    const updatedData = [...bookData];
+    localStorage.setItem("bookFormData", JSON.stringify(updatedData));
+    setOpenDialog(false);
+  };
+  
   const handleDelete = (index) => {
-    // Handle delete logic based on your requirements
     const updatedData = [...bookData];
     updatedData.splice(index, 1);
     setBookData(updatedData);
     localStorage.setItem("bookFormData", JSON.stringify(updatedData));
+  };
+  
+
+  const handleCancel = () => {
+    // Reset editIndex and close the dialog
+    setEditIndex(null);
+    setOpenDialog(false);
   };
 
   const filteredData = bookData.filter(
@@ -93,6 +154,74 @@ const ShowAdmin = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Edit Dialog */}
+      <Dialog open={openDialog} onClose={handleCancel}>
+        <DialogTitle>Edit Book</DialogTitle>
+        <DialogContent>
+          {/* Display read-only fields */}
+          <TextField
+            label="Book Name"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={bookData[editIndex]?.bookName || ""}
+            InputProps={{ readOnly: true }}
+          />
+          <TextField
+            label="Book ISBN"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={bookData[editIndex]?.bookISBN || ""}
+            InputProps={{ readOnly: true }}
+          />
+          <TextField
+            label="Book Category"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={bookData[editIndex]?.bookCategory || ""}
+            InputProps={{ readOnly: true }}
+          />
+          {/* Add other read-only fields as needed */}
+
+          {/* Editable fields */}
+          <TextField
+            label="Row Number"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={bookData[editIndex]?.rowNumber || ""}
+            onChange={(e) => {
+              // Handle changes to the editable field
+              // You may want to update the local state or form data
+              const updatedData = [...bookData];
+              updatedData[editIndex].rowNumber = e.target.value;
+              setBookData(updatedData);
+            }}
+          />
+          <TextField
+            label="Cost"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={bookData[editIndex]?.cost || ""}
+            onChange={(e) => {
+              // Handle changes to the editable field
+              // You may want to update the local state or form data
+              const updatedData = [...bookData];
+              updatedData[editIndex].cost = e.target.value;
+              setBookData(updatedData);
+            }}
+          />
+          {/* Add other editable fields as needed */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleSave}>Save</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

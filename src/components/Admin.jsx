@@ -161,8 +161,8 @@ const Admin = () => {
               onChange={handleChange}
               required
             >
-              <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="unavailable">Unavailable</MenuItem>
+              <MenuItem value="In Stock">Available</MenuItem>
+              <MenuItem value="Out of Stock">Unavailable</MenuItem>
             </Select>
           </FormControl>
           <Button type="submit" variant="contained" color="primary" fullWidth>

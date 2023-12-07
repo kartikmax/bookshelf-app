@@ -10,3 +10,5 @@
 <a href="localhost:5173">click to me to  run  http://localhost:5173 </a> 
 
 the deployed link is this link-to-deployed netlify
+
+https://tubular-valkyrie-f5b42e.netlify.app/
