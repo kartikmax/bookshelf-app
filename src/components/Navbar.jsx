@@ -7,7 +7,7 @@ const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My React App
+          My BookShelf 
         </Typography>
         <Button color="inherit" component={Link} to="/">
           Admin

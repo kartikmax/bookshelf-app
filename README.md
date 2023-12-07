@@ -1,8 +1,12 @@
-# React + Vite
+# book shelf app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## instructions to run the application
 
-Currently, two official plugins are available:
+1. cd bookshelf-app
+2. npm i
+3. npm run dev
+4. server is running on localhost:5173
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<a href="localhost:5173">click to me to  run  http://localhost:5173 </a> 
+
+the deployed link is this link-to-deployed netlify
