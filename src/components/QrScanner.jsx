@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 function QrScanner({ url }) {
   const qrCodeRef = useRef(null);
 
-  const urlForNetlify = "https://tubular-valkyrie-f5b42e.netlify.app/";
+  const urlForNetlify = "https://tubular-valkyrie-f5b42e.netlify.app";
 
   // Use state to handle visibility
   const [qrIsVisible, setQrIsVisible] = useState(false);
